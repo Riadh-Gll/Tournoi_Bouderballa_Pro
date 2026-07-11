@@ -986,27 +986,26 @@ body.icons-naked .nl.active .ni img{
       <!-- MATCHES -->
       <section class="page" id="page-matches">
         <div class="pb" id="pb-mt"></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px;flex-wrap:wrap" id="matches-view-toggle">
-          <button id="btn-view-knockout" onclick="setMatchView('knockout')"
-            style="padding:7px 16px;border-radius:8px;border:1.5px solid rgba(232,0,28,0.45);background:linear-gradient(135deg,rgba(232,0,28,0.12),rgba(139,0,20,0.08));cursor:pointer;font-size:11px;font-weight:700;color:#FF4D61;display:flex;align-items:center;gap:6px;transition:all .2s;letter-spacing:.04em">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2"/><path d="M8 5h8v14H8z"/><path d="M12 19v2M10 21h4"/></svg>
-            ⚡ Phase Éliminatoire
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap" id="matches-view-toggle">
+          <button id="btn-view-bracket" onclick="setMatchView('bracket')"
+            style="padding:7px 16px;border-radius:8px;border:1.5px solid rgba(201,162,39,0.45);background:linear-gradient(135deg,rgba(201,162,39,0.12),rgba(120,90,0,0.08));cursor:pointer;font-size:11px;font-weight:700;color:#C9A227;display:flex;align-items:center;gap:6px;transition:all .2s;letter-spacing:.04em">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2"/><path d="M8 5h8v10H8z"/><path d="M12 15v4"/><path d="M8 19h8"/></svg>
+            🏆 Phase Éliminatoire
           </button>
-          <div style="display:flex;align-items:center;gap:8px">
-            <span style="font-size:11px;color:var(--text3)">Vue :</span>
-            <button id="btn-view-list" onclick="setMatchView('list')"
-              style="padding:6px 12px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.15);background:var(--bg3);cursor:pointer;font-size:11px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:5px;transition:all .15s">
-              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4h12M2 8h12M2 12h12"/></svg>Liste
-            </button>
-            <button id="btn-view-cal" onclick="setMatchView('calendar')"
-              style="padding:6px 12px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.15);background:var(--bg3);cursor:pointer;font-size:11px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:5px;transition:all .15s">
-              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="2.5" width="14" height="11" rx="1.2"/><path d="M1 6.5h14M5 2.5v4M11 2.5v4"/></svg>Calendrier
-            </button>
-          </div>
+          <button id="btn-view-list" onclick="setMatchView('list')"
+            style="padding:7px 14px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.15);background:var(--bg3);cursor:pointer;font-size:11px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:5px;transition:all .15s">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4h12M2 8h12M2 12h12"/></svg>Liste
+          </button>
+          <button id="btn-view-programme" onclick="setMatchView('programme')"
+            style="padding:7px 14px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.15);background:var(--bg3);cursor:pointer;font-size:11px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:5px;transition:all .15s">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="2.5" width="14" height="11" rx="1.2"/><path d="M1 6.5h14M5 2.5v4M11 2.5v4"/><circle cx="4.5" cy="9.5" r=".9"/><circle cx="8" cy="9.5" r=".9"/><circle cx="11.5" cy="9.5" r=".9"/></svg>Programme
+          </button>
         </div>
         <div class="mlist" id="mt-list"></div>
         <div id="mt-calendar" style="display:none"></div>
         <div id="mt-knockout" style="display:none"></div>
+        <div id="mt-programme" style="display:none"></div>
+        <div id="mt-bracket" style="display:none"></div>
       </section>
 
       <!-- RESULTS -->
@@ -1412,13 +1411,14 @@ const DB = {
   ui:{ playerCard:true, managerComp:true, commentsEnabled:true, matchView:'list' },
   fantasyTeams:[], // { id, ownerUser, name, playerIds:[], points, updatedAt }
   fantasyUsers:[], // { username, passHash }
+  bracket:{ r16:new Array(16).fill(null), qf:new Array(8).fill(null), sf:new Array(4).fill(null), fin:new Array(2).fill(null) },
   _unsubs:{},
 
   async load(){
     // settings
     try {
       const snap = await _fdb.collection('settings').doc('main').get();
-      if(snap.exists){ const s=snap.data(); if(s.creds){this.creds=s.creds; if(!this.creds.organizer)this.creds.organizer={email:'admin_1@tournoi.dz',pass:'2026.2026'};} if(s.registration)this.registration=s.registration; if(s.season){this.season=s.season; SEASON_CATS_EXTRA=this.season.extraCats||[];} if(s.branding)this.branding={...this.branding,...s.branding}; if(s.fantasy)this.fantasy={...this.fantasy,...s.fantasy}; if(s.ui)this.ui={...this.ui,...s.ui}; if(s.tableStyle){this.tableStyle={...(this.tableStyle||{}),...s.tableStyle}; _tblTargetMode=this.tableStyle.targetMode||'dark';} applyTableStyle(); }
+      if(snap.exists){ const s=snap.data(); if(s.creds){this.creds=s.creds; if(!this.creds.organizer)this.creds.organizer={email:'admin_1@tournoi.dz',pass:'2026.2026'};} if(s.registration)this.registration=s.registration; if(s.season){this.season=s.season; SEASON_CATS_EXTRA=this.season.extraCats||[];} if(s.branding)this.branding={...this.branding,...s.branding}; if(s.fantasy)this.fantasy={...this.fantasy,...s.fantasy}; if(s.ui)this.ui={...this.ui,...s.ui}; if(s.tableStyle){this.tableStyle={...(this.tableStyle||{}),...s.tableStyle}; _tblTargetMode=this.tableStyle.targetMode||'dark';} if(s.bracket){const def={r16:new Array(16).fill(null),qf:new Array(8).fill(null),sf:new Array(4).fill(null),fin:new Array(2).fill(null)};this.bracket={...def,...s.bracket};} applyTableStyle(); }
       else { await _fdb.collection('settings').doc('main').set({creds:this.creds,registration:this.registration,season:this.season,branding:this.branding,fantasy:this.fantasy,ui:this.ui,tableStyle:this.tableStyle||{}}); }
     } catch(e){ console.warn('settings load',e); }
 
@@ -1475,7 +1475,7 @@ const DB = {
   },
 
   async saveSettings(){
-    await _fdb.collection('settings').doc('main').set({creds:this.creds,registration:this.registration,season:this.season,branding:this.branding,fantasy:this.fantasy,ui:this.ui,tableStyle:this.tableStyle||{}});
+    await _fdb.collection('settings').doc('main').set({creds:this.creds,registration:this.registration,season:this.season,branding:this.branding,fantasy:this.fantasy,ui:this.ui,tableStyle:this.tableStyle||{},bracket:this.bracket||{}});
   },
 
   nid(arr){ return arr.length ? Math.max(...arr.map(x=>Number(x.id)||0))+1 : 1; },
@@ -2264,33 +2264,238 @@ function rMatches(){
   const listEl = document.getElementById('mt-list');
   const calEl  = document.getElementById('mt-calendar');
   const koEl   = document.getElementById('mt-knockout');
+  const prEl   = document.getElementById('mt-programme');
+  const brEl   = document.getElementById('mt-bracket');
 
-  // Knockout button highlight
-  const btnKo = document.getElementById('btn-view-knockout');
-  if(btnKo){
-    btnKo.style.background   = view==='knockout' ? 'linear-gradient(135deg,rgba(232,0,28,0.28),rgba(139,0,20,0.2))' : 'linear-gradient(135deg,rgba(232,0,28,0.12),rgba(139,0,20,0.08))';
-    btnKo.style.borderColor  = view==='knockout' ? '#e8001c' : 'rgba(232,0,28,0.45)';
-    btnKo.style.color        = view==='knockout' ? '#FF6B6B' : '#FF4D61';
-    btnKo.style.boxShadow    = view==='knockout' ? '0 0 16px rgba(232,0,28,0.3)' : 'none';
-  }
+  const btnPr = document.getElementById('btn-view-programme');
+  if(btnPr){ btnPr.style.background = view==='programme' ? 'rgba(255,184,0,.18)' : 'var(--bg3)';
+             btnPr.style.borderColor = view==='programme' ? 'var(--gold)'         : 'rgba(255,255,255,0.15)';
+             btnPr.style.color       = view==='programme' ? 'var(--gold)'         : 'var(--text2)'; }
+  const btnBr = document.getElementById('btn-view-bracket');
+  if(btnBr){ btnBr.style.background   = view==='bracket' ? 'linear-gradient(135deg,rgba(201,162,39,0.28),rgba(120,90,0,0.2))' : 'linear-gradient(135deg,rgba(201,162,39,0.12),rgba(120,90,0,0.08))';
+             btnBr.style.borderColor  = view==='bracket' ? '#C9A227' : 'rgba(201,162,39,0.45)';
+             btnBr.style.color        = view==='bracket' ? '#FFD700' : '#C9A227';
+             btnBr.style.boxShadow    = view==='bracket' ? '0 0 16px rgba(201,162,39,0.35)' : 'none'; }
+
+  const _hide = el => { if(el) el.style.display='none'; };
+  const _allViews = [listEl,calEl,koEl,prEl,brEl];
 
   if(view === 'calendar'){
-    listEl.style.display='none'; calEl.style.display='block'; if(koEl) koEl.style.display='none';
+    _allViews.forEach(_hide); calEl.style.display='block';
     renderCalendar(_calYear, _calMonth);
   } else if(view === 'knockout'){
-    listEl.style.display='none'; calEl.style.display='none'; if(koEl) koEl.style.display='block';
+    _allViews.forEach(_hide); if(koEl) koEl.style.display='block';
     rKnockout();
+  } else if(view === 'programme'){
+    _allViews.forEach(_hide); if(prEl) prEl.style.display='block';
+    rProgrammeByDay();
+  } else if(view === 'bracket'){
+    _allViews.forEach(_hide); if(brEl) brEl.style.display='block';
+    rBracketCard();
   } else {
-    calEl.style.display='none'; if(koEl) koEl.style.display='none'; listEl.style.display='block';
+    _allViews.forEach(_hide); listEl.style.display='block';
     if(!DB.sMatches().length){ listEl.innerHTML='<div class="empty"><p>Aucun match planifié</p></div>'; return; }
     listEl.innerHTML = DB.sMatches().map(m=>mCard(m,isA,false,false)).join('');
   }
+}
+
+/* ═══ PROGRAMME PAR JOUR (façon affiche officielle) ═══ */
+const _JOURS_FR=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+const _MOIS_FR_LC=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+function rProgrammeByDay(){
+  const prEl=document.getElementById('mt-programme'); if(!prEl)return;
+  const matches=DB.sMatches().slice().filter(m=>m.date);
+  if(!matches.length){ prEl.innerHTML='<div class="empty"><p>Aucun match planifié</p></div>'; return; }
+  const byDate={};
+  matches.forEach(m=>{ (byDate[m.date]=byDate[m.date]||[]).push(m); });
+  const dates=Object.keys(byDate).sort();
+  prEl.innerHTML=`<div style="max-width:640px;margin:0 auto">
+    <div style="text-align:center;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.06em;color:#FFB800;margin-bottom:16px">📅 Programme des matchs</div>
+    ${dates.map(d=>{
+      const list=byDate[d].slice().sort((a,b)=>(a.heure||'').localeCompare(b.heure||''));
+      const [y,mo,dd]=d.split('-').map(Number);
+      const dObj=new Date(y,mo-1,dd);
+      const jourNom=_JOURS_FR[dObj.getDay()];
+      const rows=list.map(m=>`<tr>
+          <td style="padding:10px 12px;text-align:center;font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;font-size:13px;white-space:nowrap">${m.heure||'—'}</td>
+          <td style="padding:10px 12px;color:#fff;font-weight:700;font-size:13px;text-align:right">${DB.tnm(m.domId)}</td>
+          <td style="padding:10px 6px;text-align:center;color:#FFD24A;font-weight:800;font-size:11px">VS</td>
+          <td style="padding:10px 12px;color:#fff;font-weight:700;font-size:13px">${DB.tnm(m.visId)}</td>
+        </tr>`).join('');
+      return `<div style="display:flex;border-radius:12px;overflow:hidden;margin-bottom:10px;box-shadow:0 6px 18px rgba(0,0,0,.25)">
+        <table style="flex:1;border-collapse:collapse;background:linear-gradient(180deg,#3a0d1f,#210911)">${rows}</table>
+        <div style="width:78px;flex-shrink:0;background:linear-gradient(180deg,#e8114f,#9c0a35);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#fff;text-align:center;padding:8px 4px">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.6"><rect x="1" y="2.5" width="14" height="11" rx="1.2"/><path d="M1 6.5h14M5 2.5v4M11 2.5v4"/></svg>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.03em;line-height:1.1;margin-top:2px">${jourNom}</div>
+          <div style="font-size:10.5px;font-weight:600;opacity:.9">${dd} ${_MOIS_FR_LC[mo-1]}</div>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>`;
 }
 
 function setMatchView(v){
   DB.ui = {...(DB.ui||{}), matchView:v};
   DB.saveSettings();
   rMatches();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BRACKET CARD — Phase éliminatoire (World Cup logo style)
+   ═══════════════════════════════════════════════════════════ */
+function rBracketCard(){
+  const el=document.getElementById('mt-bracket'); if(!el) return;
+  const isA=(role==='admin'||role==='organizer');
+  if(!DB.bracket||!DB.bracket.r16) DB.bracket={r16:new Array(16).fill(null),qf:new Array(8).fill(null),sf:new Array(4).fill(null),fin:new Array(2).fill(null)};
+  const r16=DB.bracket.r16, qf=DB.bracket.qf, sf=DB.bracket.sf, fin=DB.bracket.fin;
+
+  /* ── dimensions ── */
+  const SZ=54, PGAP=8, GGAP=36, CGAP=28;
+  const GOLD='#C9A227', TW=186, finSZ=54, CUP_SZ=44;
+
+  /* ── R16 slot tops (8 slots = 4 pairs, left side) ── */
+  const r16t=[];
+  for(let p=0;p<4;p++){const b=p*(2*SZ+PGAP+GGAP); r16t.push(b); r16t.push(b+SZ+PGAP);}
+  const totalH=r16t[7]+SZ; // ≈572
+
+  /* ── QF / SF / trophy center Y ── */
+  const c=t=>t+SZ/2;
+  const qft=[0,1,2,3].map(i=>(r16t[i*2]+r16t[i*2+1]+SZ)/2-SZ/2);
+  const sft=[0,1].map(i=>(qft[i*2]+qft[i*2+1]+SZ)/2-SZ/2);
+  const trCY=(c(sft[0])+c(sft[1]))/2;
+  const finY=trCY-finSZ/2;
+
+  /* ── X positions ── */
+  const lR16x=0, lQFx=SZ+CGAP, lSFx=lQFx+SZ+CGAP, trX=lSFx+SZ+CGAP;
+  const rSFx=trX+TW+CGAP, rQFx=rSFx+SZ+CGAP, rR16x=rQFx+SZ+CGAP;
+  const totalW=rR16x+SZ;
+
+  /* ── SVG bracket paths ── */
+  /* lConn: 2 slots on left → 1 slot on right (left-to-right)
+     Draws: top horizontal + FULL vertical bar (t0→t1) + bottom horizontal + connector to dest */
+  function lConn(t0,t1,fx,toT,tx){
+    const mid=(fx+SZ+tx)/2;
+    return `M${fx+SZ},${c(t0)}H${mid}V${c(t1)} M${fx+SZ},${c(t1)}H${mid} M${mid},${c(toT)}H${tx}`;
+  }
+  /* rConn: 2 slots on right → 1 slot on left (right-to-left, mirrored) */
+  function rConn(t0,t1,fx,toT,tx){
+    const mid=(fx+tx+SZ)/2;
+    return `M${fx},${c(t0)}H${mid}V${c(t1)} M${fx},${c(t1)}H${mid} M${mid},${c(toT)}H${tx+SZ}`;
+  }
+  let svgD='';
+  for(let i=0;i<4;i++) svgD+=lConn(r16t[i*2],r16t[i*2+1],lR16x,qft[i],lQFx);
+  svgD+=lConn(qft[0],qft[1],lQFx,sft[0],lSFx);
+  svgD+=lConn(qft[2],qft[3],lQFx,sft[1],lSFx);
+  const lSFmid=(lSFx+SZ+trX)/2;
+  svgD+=`M${lSFx+SZ},${c(sft[0])}H${lSFmid}V${c(sft[1])} M${lSFx+SZ},${c(sft[1])}H${lSFmid} M${lSFmid},${trCY}H${trX}`;
+  for(let i=0;i<4;i++) svgD+=rConn(r16t[i*2],r16t[i*2+1],rR16x,qft[i],rQFx);
+  svgD+=rConn(qft[0],qft[1],rQFx,sft[0],rSFx);
+  svgD+=rConn(qft[2],qft[3],rQFx,sft[1],rSFx);
+  const rSFmid=(rSFx+trX+TW)/2;
+  svgD+=`M${rSFx},${c(sft[0])}H${rSFmid}V${c(sft[1])} M${rSFx},${c(sft[1])}H${rSFmid} M${rSFmid},${trCY}H${trX+TW}`;
+
+  /* ── render a logo slot ── */
+  function logoSlot(id,round,idx,x,y,sz){
+    sz=sz||SZ;
+    const t=DB.teams.find(t=>t.id===Number(id));
+    let inner;
+    if(t&&t.logo) inner=`<img src="${t.logo}" style="width:${sz}px;height:${sz}px;border-radius:9px;object-fit:contain;display:block">`;
+    else if(t)    inner=`<div style="width:${sz}px;height:${sz}px;border-radius:9px;background:linear-gradient(135deg,${t.couleur}cc,${t.couleur}66);display:flex;align-items:center;justify-content:center;font-size:${Math.round(sz*.30)}px;font-weight:900;color:#fff;font-family:'Syne',sans-serif">${t.nom.slice(0,2).toUpperCase()}</div>`;
+    else          inner=`<div style="width:${sz}px;height:${sz}px;border-radius:9px;background:rgba(201,162,39,.05);border:1.5px dashed rgba(201,162,39,.3);display:flex;align-items:center;justify-content:center;color:rgba(201,162,39,.45);font-size:${Math.round(sz*.38)}px">${isA?'+':'?'}</div>`;
+    const clk=isA?`onclick="openBracketPicker('${round}',${idx})"`:'' ;
+    const title=t?`title="${t.nom}"`:'' ;
+    return `<div ${clk} ${title} style="position:absolute;left:${x}px;top:${y}px;cursor:${isA?'pointer':'default'};border:2px solid ${t?GOLD:'rgba(201,162,39,.18)'};border-radius:11px;background:${t?'rgba(201,162,39,.08)':'transparent'};box-shadow:${t?`0 0 18px rgba(201,162,39,.22)`:'none'};transition:all .15s">${inner}</div>`;
+  }
+
+  /* ── place all slots ── */
+  let slots='';
+  for(let i=0;i<8;i++) slots+=logoSlot(r16[i],  'r16',i,  lR16x,r16t[i]);
+  for(let i=0;i<4;i++) slots+=logoSlot(qf[i],   'qf', i,  lQFx, qft[i]);
+  for(let i=0;i<2;i++) slots+=logoSlot(sf[i],   'sf', i,  lSFx, sft[i]);
+  slots+=logoSlot(sf[2],'sf',2,rSFx,sft[0]);
+  slots+=logoSlot(sf[3],'sf',3,rSFx,sft[1]);
+  for(let i=0;i<4;i++) slots+=logoSlot(qf[4+i], 'qf', 4+i, rQFx, qft[i]);
+  for(let i=0;i<8;i++) slots+=logoSlot(r16[8+i],'r16',8+i, rR16x,r16t[i]);
+
+  /* ── finale finalists (side-by-side around trophy) ── */
+  const tFin0=DB.teams.find(t=>t.id===Number(fin[0]));
+  const tFin1=DB.teams.find(t=>t.id===Number(fin[1]));
+  function finLogoInner(t,sz){
+    if(t&&t.logo) return `<img src="${t.logo}" style="width:${sz}px;height:${sz}px;border-radius:10px;object-fit:contain;display:block">`;
+    if(t)         return `<div style="width:${sz}px;height:${sz}px;border-radius:10px;background:linear-gradient(135deg,${t.couleur}cc,${t.couleur}66);display:flex;align-items:center;justify-content:center;font-size:${Math.round(sz*.28)}px;font-weight:900;color:#fff;font-family:'Syne',sans-serif">${t.nom.slice(0,2).toUpperCase()}</div>`;
+    return `<div style="width:${sz}px;height:${sz}px;border-radius:10px;background:rgba(255,215,0,.06);border:2px dashed rgba(255,215,0,.35);display:flex;align-items:center;justify-content:center;color:rgba(255,215,0,.5);font-size:${Math.round(sz*.4)}px">${isA?'+':'?'}</div>`;
+  }
+  const cupGap=(TW-finSZ-CUP_SZ-finSZ)/2;
+  const fin0X=trX, fin1X=trX+finSZ+cupGap+CUP_SZ+cupGap, cupX=trX+finSZ+cupGap;
+
+  /* fin[0] */
+  slots+=`<div onclick="${isA?"openBracketPicker('fin',0)":''}" style="position:absolute;left:${fin0X}px;top:${finY}px;cursor:${isA?'pointer':'default'};border:3px solid ${tFin0?'#FFD700':'rgba(255,215,0,.25)'};border-radius:12px;background:${tFin0?'rgba(255,215,0,.1)':'transparent'};box-shadow:${tFin0?'0 0 24px rgba(255,215,0,.3)':'none'};transition:all .15s">${finLogoInner(tFin0,finSZ)}</div>`;
+  /* fin[1] */
+  slots+=`<div onclick="${isA?"openBracketPicker('fin',1)":''}" style="position:absolute;left:${fin1X}px;top:${finY}px;cursor:${isA?'pointer':'default'};border:3px solid ${tFin1?'#FFD700':'rgba(255,215,0,.25)'};border-radius:12px;background:${tFin1?'rgba(255,215,0,.1)':'transparent'};box-shadow:${tFin1?'0 0 24px rgba(255,215,0,.3)':'none'};transition:all .15s">${finLogoInner(tFin1,finSZ)}</div>`;
+  /* Trophy cup icon */
+  slots+=`<div style="position:absolute;left:${cupX}px;top:${trCY-CUP_SZ/2}px;width:${CUP_SZ}px;height:${CUP_SZ}px;display:flex;align-items:center;justify-content:center;pointer-events:none">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="1.2" style="width:${CUP_SZ}px;height:${CUP_SZ}px;filter:drop-shadow(0 0 10px rgba(255,215,0,.65))">
+      <path d="M6 9H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2"/><path d="M8 5h8v10H8z"/><path d="M12 15v4"/><path d="M8 19h8"/>
+    </svg>
+  </div>`;
+
+  /* ── round labels ── */
+  const lbl=(x,txt)=>`<div style="position:absolute;top:${totalH+8}px;left:${x}px;width:${SZ}px;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:9px;letter-spacing:.12em;color:rgba(201,162,39,.6)">${txt}</div>`;
+  const lblFin=`<div style="position:absolute;top:${totalH+8}px;left:${trX}px;width:${TW}px;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:9px;letter-spacing:.12em;color:rgba(255,215,0,.7)">FINALE</div>`;
+
+  el.innerHTML=`
+    <div style="background:linear-gradient(160deg,#030b18 0%,#060f22 55%,#030b18 100%);border:2px solid rgba(201,162,39,.3);border-radius:16px;padding:20px 16px 36px;overflow-x:auto">
+      <div style="text-align:center;margin-bottom:20px">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.22em;color:${GOLD};text-shadow:0 0 20px rgba(201,162,39,.4)">🏆 Phase Éliminatoire</div>
+        ${isA?`<div style="font-size:10px;color:rgba(201,162,39,.5);margin-top:3px">Cliquez sur un logo pour assigner une équipe</div>`:''}
+      </div>
+      <div style="position:relative;width:${totalW}px;height:${totalH+36}px;margin:0 auto">
+        <svg style="position:absolute;top:0;left:0;width:${totalW}px;height:${totalH}px;overflow:visible;pointer-events:none">
+          <path d="${svgD}" fill="none" stroke="${GOLD}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".75"/>
+        </svg>
+        ${slots}
+        ${lbl(lR16x,'8ème')}${lbl(lQFx,'Quart')}${lbl(lSFx,'Demi')}${lblFin}${lbl(rSFx,'Demi')}${lbl(rQFx,'Quart')}${lbl(rR16x,'8ème')}
+      </div>
+    </div>
+    <!-- Bracket Picker Modal -->
+    <div id="bracket-picker" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.82);align-items:center;justify-content:center" onclick="if(event.target===this)this.style.display='none'">
+      <div style="background:#0d1a2e;border:2px solid ${GOLD};border-radius:16px;padding:20px;max-width:360px;width:92%;max-height:72vh;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.12em;color:${GOLD}">Choisir une équipe</span>
+          <button onclick="document.getElementById('bracket-picker').style.display='none'" style="background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.6);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center">✕</button>
+        </div>
+        <input id="bp-search" oninput="bpFilter()" placeholder="🔍 Rechercher une équipe…" style="background:rgba(255,255,255,.06);border:1.5px solid rgba(201,162,39,.3);border-radius:10px;padding:9px 12px;color:#fff;font-size:12px;outline:none;margin-bottom:10px">
+        <div id="bp-list" style="overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:4px"></div>
+      </div>
+    </div>`;
+}
+
+let _bpRound='',_bpIdx=0;
+function openBracketPicker(round,idx){
+  if(role!=='admin'&&role!=='organizer') return;
+  _bpRound=round; _bpIdx=idx;
+  const inp=document.getElementById('bp-search');
+  if(inp) inp.value='';
+  bpFilter();
+  document.getElementById('bracket-picker').style.display='flex';
+}
+function bpFilter(){
+  const q=(document.getElementById('bp-search').value||'').toLowerCase();
+  const teams=DB.sTeams().filter(t=>!q||t.nom.toLowerCase().includes(q));
+  const listEl=document.getElementById('bp-list'); if(!listEl) return;
+  listEl.innerHTML=`<div onclick="setBracketSlot('${_bpRound}',${_bpIdx},null)" style="padding:9px 12px;border-radius:9px;background:rgba(232,0,28,.1);border:1px solid rgba(232,0,28,.2);color:rgba(255,100,100,.8);font-size:12px;cursor:pointer;font-weight:600">✕ Effacer ce slot</div>`
+  +teams.map(t=>`<div onclick="setBracketSlot('${_bpRound}',${_bpIdx},${t.id})" style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;cursor:pointer;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);transition:background .12s">
+      ${teamLogoHTML(t.id,34)}
+      <span style="font-size:12px;color:#fff;font-weight:600">${t.nom}</span>
+    </div>`).join('');
+}
+function setBracketSlot(round,idx,teamId){
+  if(!DB.bracket) DB.bracket={r16:new Array(16).fill(null),qf:new Array(8).fill(null),sf:new Array(4).fill(null),fin:new Array(2).fill(null)};
+  DB.bracket[round][idx]=teamId;
+  DB.saveSettings().then(()=>{
+    document.getElementById('bracket-picker').style.display='none';
+    rBracketCard();
+  });
 }
 
 /* ═══════════════════════════════════════════════════════════
