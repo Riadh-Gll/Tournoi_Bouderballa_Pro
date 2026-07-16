@@ -597,6 +597,8 @@ body.light ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#0d9668,#
 .nl[data-page="results"] .ni svg{stroke:#fff !important;}
 .nl[data-page="standing"] .ni{background:linear-gradient(135deg,#00FF87,#0d9668) !important;border-color:rgba(0,255,135,0.5);box-shadow:0 4px 14px rgba(0,255,135,0.40),inset 0 1px 0 rgba(255,255,255,0.25);}
 .nl[data-page="standing"] .ni svg{stroke:#0a0c12 !important;stroke-width:2.6 !important;}
+.nl[data-page="stats"] .ni{background:linear-gradient(135deg,#a855f7,#7c3aed) !important;border-color:rgba(168,85,247,0.5);box-shadow:0 4px 14px rgba(168,85,247,0.40),inset 0 1px 0 rgba(255,255,255,0.25);}
+.nl[data-page="stats"] .ni svg{stroke:#fff !important;}
 .nl[data-page="comments-admin"] .ni,.nl[data-page="avis"] .ni,.nl[data-page="avis-admin"] .ni{background:linear-gradient(135deg,#fb923c,#ea580c) !important;border-color:rgba(251,146,60,0.5);box-shadow:0 4px 14px rgba(251,146,60,0.40),inset 0 1px 0 rgba(255,255,255,0.25);}
 .nl[data-page="comments-admin"] .ni svg,.nl[data-page="avis"] .ni svg,.nl[data-page="avis-admin"] .ni svg{stroke:#fff !important;}
 .nl[data-page="accounts"] .ni{background:linear-gradient(135deg,#a78bfa,#7c3aed) !important;border-color:rgba(167,139,250,0.5);box-shadow:0 4px 14px rgba(167,139,250,0.40),inset 0 1px 0 rgba(255,255,255,0.25);}
@@ -852,6 +854,7 @@ body.icons-naked .nl.active .ni img{
         <div class="nl" onclick="go('matches')" data-page="matches"><span class="ni" data-icon-key="nav-matches" style="background:transparent;padding:0;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#FFB800" stroke-width="1.8"><rect x="1" y="2.5" width="14" height="11" rx="1.2"/><path d="M1 6.5h14M5 2.5v4M11 2.5v4"/></svg></span><div class="nt"><span class="ntl">Programme</span><span class="ntp">Planifier les matchs</span></div></div>
         <div class="nl" onclick="go('results')" data-page="results"><span class="ni" data-icon-key="nav-results" style="background:transparent;padding:0;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#FFB800" stroke-width="1.8"><circle cx="8" cy="8" r="6.5"/><path d="M5 8l2 2 4-4"/></svg></span><div class="nt"><span class="ntl">Résultats</span><span class="ntp">Saisir les scores</span></div></div>
         <div class="nl" onclick="go('standing')" data-page="standing"><span class="ni" data-icon-key="nav-standing" style="background:transparent;padding:0;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#FFB800" stroke-width="1.8"><path d="M3 13V7M8 13V3M13 13V9"/></svg></span><div class="nt"><span class="ntl">Classement</span><span class="ntp">Tableau général</span></div></div>
+        <div class="nl" onclick="go('stats')" data-page="stats"><span class="ni" data-icon-key="nav-stats" style="background:transparent;padding:0;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#FFB800" stroke-width="1.8"><path d="M2 12l3.5-4 3 2.5L12 5l2 2"/><path d="M1 14h14"/></svg></span><div class="nt"><span class="ntl">Statistiques</span><span class="ntp">Buteurs, attaque, défense</span></div></div>
       </div>
       <div class="nav-grp"><span class="nav-grp-lbl">Modération</span>
         <div class="nl" onclick="go('comments-admin')" data-page="comments-admin"><span class="ni" data-icon-key="nav-comments-admin" style="background:transparent;padding:0;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#FFB800" stroke-width="1.8"><path d="M2 2h12v9H9l-3 3v-3H2z"/></svg></span><div class="nt" style="display:flex;align-items:center;justify-content:space-between"><div><span class="ntl">Commentaires</span><span class="ntp">Approuver</span></div><span class="nav-badge" id="cmt-badge" style="display:none">0</span></div></div>
@@ -873,6 +876,7 @@ body.icons-naked .nl.active .ni img{
         <div class="nl" onclick="go('matches')" data-page="matches"><span class="ni" data-icon-key="nav-matches" style="background:transparent;padding:0;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#FFB800" stroke-width="1.8"><rect x="1" y="2.5" width="14" height="11" rx="1.2"/><path d="M1 6.5h14M5 2.5v4M11 2.5v4"/></svg></span><div class="nt"><span class="ntl">Programme</span><span class="ntp">Calendrier</span></div></div>
         <div class="nl" onclick="go('results')" data-page="results"><span class="ni" data-icon-key="nav-results" style="background:transparent;padding:0;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#FFB800" stroke-width="1.8"><circle cx="8" cy="8" r="6.5"/><path d="M5 8l2 2 4-4"/></svg></span><div class="nt"><span class="ntl">Résultats</span><span class="ntp">Scores & stats</span></div></div>
         <div class="nl" onclick="go('standing')" data-page="standing"><span class="ni" data-icon-key="nav-standing" style="background:transparent;padding:0;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#FFB800" stroke-width="1.8"><path d="M3 13V7M8 13V3M13 13V9"/></svg></span><div class="nt"><span class="ntl">Classement</span><span class="ntp">Tableau général</span></div></div>
+        <div class="nl" onclick="go('stats')" data-page="stats"><span class="ni" data-icon-key="nav-stats" style="background:transparent;padding:0;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#FFB800" stroke-width="1.8"><path d="M2 12l3.5-4 3 2.5L12 5l2 2"/><path d="M1 14h14"/></svg></span><div class="nt"><span class="ntl">Statistiques</span><span class="ntp">Buteurs, attaque, défense</span></div></div>
         <div class="nl" onclick="go('avis')" data-page="avis"><span class="ni" data-icon-key="nav-avis" style="background:transparent;padding:0;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#FFB800" stroke-width="1.8"><path d="M2 2h12v9H9l-3 3v-3H2z"/></svg></span><div class="nt"><span class="ntl">Avis & Réclamations</span><span class="ntp">Votre retour</span></div></div>
       </div>
       <div class="nav-grp nav-fantasy-grp" style="display:none"><span class="nav-grp-lbl">Fantasy</span>
@@ -1020,6 +1024,12 @@ body.icons-naked .nl.active .ni img{
         <div id="st-groups" style="display:flex;flex-direction:column;gap:18px"></div>
       </section>
 
+      <!-- STATS -->
+      <section class="page" id="page-stats">
+        <div class="pb pbu"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12l3.5-4 3 2.5L12 5l2 2"/><path d="M1 14h14"/></svg> Statistiques du tournoi</div>
+        <div id="stats-body"></div>
+      </section>
+
       <!-- COMMENTS ADMIN -->
       <section class="page" id="page-comments-admin">
         <div class="pb pba"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 1l1.5 3 3.3.5-2.4 2.3.6 3.2L7 8.5 4 10l.6-3.2L2.2 4.5 5.5 4z"/></svg> Admin — Approuver ou rejeter les commentaires des visiteurs</div>
@@ -1076,11 +1086,11 @@ body.icons-naked .nl.active .ni img{
 
       <!-- v08 : Page À propos -->
       <section class="page" id="page-about">
-        <div class="pb pbu"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="7" cy="7" r="6"/><path d="M7 6v4M7 4h.01"/></svg> À propos de la plateforme Tournoi Arkoub Pro</div>
+        <div class="pb pbu"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="7" cy="7" r="6"/><path d="M7 6v4M7 4h.01"/></svg> À propos de la plateforme FTBouderbala</div>
         <div class="about-wrap">
           <div class="about-card">
             <h3><span class="ab-ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke-width="1.9"><circle cx="8" cy="8" r="6.5"/><path d="M5 8l2 2 4-4"/></svg></span>Présentation</h3>
-            <p><strong style="color:var(--text)">Tournoi Arkoub Pro</strong> est une plateforme web complète de gestion de tournoi de football. Elle permet aux organisateurs de gérer l'ensemble du cycle de vie d'une compétition — des inscriptions des joueurs jusqu'au classement final — et offre aux visiteurs et aux joueurs un espace interactif pour suivre les matchs, consulter les statistiques et participer en mode Fantasy.</p>
+            <p><strong style="color:var(--text)">FTBouderbala</strong> est une plateforme web complète de gestion de tournoi de football. Elle permet aux organisateurs de gérer l'ensemble du cycle de vie d'une compétition — des inscriptions des joueurs jusqu'au classement final — et offre aux visiteurs et aux joueurs un espace interactif pour suivre les matchs, consulter les statistiques et participer en mode Fantasy.</p>
             <p>Conçue pour être moderne, rapide et responsive, la plateforme fonctionne aussi bien sur ordinateur que sur smartphone, avec un mode clair et un mode sombre.</p>
           </div>
 
@@ -1115,7 +1125,7 @@ body.icons-naked .nl.active .ni img{
           </div>
 
           <div class="about-card" style="text-align:center; color:var(--text3); font-size:11.5px;">
-            <p>© 2026 Tournoi Arkoub Pro — Tous droits réservés.</p>
+            <p>© 2026 FTBouderbala — Tous droits réservés.</p>
           </div>
         </div>
       </section>
@@ -1776,6 +1786,7 @@ function rPage(pg){
   if(pg==='matches') rMatches();
   if(pg==='results') rResults();
   if(pg==='standing') rStanding();
+  if(pg==='stats') rStats();
   if(pg==='comments-admin') rCmtsAdmin();
   if(pg==='avis-admin') rAvisAdmin();
   if(pg==='avis') rAvisUser();
@@ -2254,9 +2265,13 @@ function rMatches(){
   const btnC = document.getElementById('btn-view-cal');
   const tog  = document.getElementById('matches-view-toggle');
   if(tog) tog.style.display = 'flex';
-  if(btnL){ btnL.style.background = view==='list'     ? 'rgba(255,184,0,.18)' : 'var(--bg3)';
-            btnL.style.borderColor = view==='list'     ? 'var(--gold)'         : 'rgba(255,255,255,0.15)';
-            btnL.style.color       = view==='list'     ? 'var(--gold)'         : 'var(--text2)'; }
+  // Bouton "Liste" visible uniquement pour admin/organizer
+  if(btnL){
+    btnL.style.display     = (role==='admin'||role==='organizer') ? 'flex' : 'none';
+    btnL.style.background  = view==='list' ? 'rgba(255,184,0,.18)' : 'var(--bg3)';
+    btnL.style.borderColor = view==='list' ? 'var(--gold)'         : 'rgba(255,255,255,0.15)';
+    btnL.style.color       = view==='list' ? 'var(--gold)'         : 'var(--text2)';
+  }
   if(btnC){ btnC.style.background = view==='calendar' ? 'rgba(255,184,0,.18)' : 'var(--bg3)';
             btnC.style.borderColor = view==='calendar' ? 'var(--gold)'         : 'rgba(255,255,255,0.15)';
             btnC.style.color       = view==='calendar' ? 'var(--gold)'         : 'var(--text2)'; }
@@ -2815,18 +2830,114 @@ function openCalDay(year, month, day){
     + ms.map(m=>mCard(m,isA,m.statut==='Terminé',true)).join('')
     +'</div>';
 }
+let _rsWeekIdx = 0;
+
+/* Helper: get Friday-start of the week containing date d */
+function _rsWeekStart(d){
+  const dt = new Date(d); dt.setHours(0,0,0,0);
+  const diff = (dt.getDay() + 2) % 7; // 0=Fri … 6=Thu
+  dt.setDate(dt.getDate() - diff);
+  return dt;
+}
+function rsWeekNav(dir){ _rsWeekIdx += dir; rResults(); }
+function rsWeekGo(idx){ _rsWeekIdx = idx; rResults(); }
+
 function rResults(){
-  const isA=role==='admin';
-  const mt=document.getElementById('mt-list'); if(mt) mt.innerHTML='';
-  const l=document.getElementById('rs-list');
-  // Afficher : En cours + Prolongation + Terminé (live en premier, prolongation ensuite)
-  const list=DB.sMatches().filter(m=>m.statut==='Terminé'||m.statut==='En cours'||m.statut==='Prolongation')
-    .sort((a,b)=>{
-      const order={['En cours']:0,['Prolongation']:1,['Terminé']:2};
-      return (order[a.statut]??3)-(order[b.statut]??3);
-    });
-  if(!list.length){l.innerHTML=`<div class="empty"><p>Aucun match terminé ou en cours pour l'instant</p></div>`;return;}
-  l.innerHTML=list.map(m=>mCard(m,isA,true,true)).join('');
+  const isA = role==='admin';
+  const l = document.getElementById('rs-list');
+
+  const allMatches = DB.sMatches().filter(m =>
+    m.statut==='Terminé' || m.statut==='En cours' || m.statut==='Prolongation'
+  );
+
+  if(!allMatches.length){
+    l.innerHTML = `<div class="empty"><p>Aucun match terminé ou en cours pour l'instant</p></div>`;
+    return;
+  }
+
+  /* Group by week-start key (YYYY-MM-DD of the Friday) */
+  const weekMap = {};
+  allMatches.forEach(m => {
+    if(!m.date) return;
+    const ws = _rsWeekStart(new Date(m.date));
+    const key = ws.toISOString().slice(0,10);
+    if(!weekMap[key]) weekMap[key] = { start: ws, matches: [] };
+    weekMap[key].matches.push(m);
+  });
+
+  /* Matches without a date go into "sans date" bucket — shown separately if needed */
+  const noDates = allMatches.filter(m => !m.date);
+
+  const weeks = Object.keys(weekMap).sort();
+  if(!weeks.length && !noDates.length){
+    l.innerHTML = `<div class="empty"><p>Aucun match avec date</p></div>`; return;
+  }
+
+  /* Clamp index */
+  _rsWeekIdx = Math.max(0, Math.min(_rsWeekIdx, weeks.length - 1));
+
+  const curKey   = weeks[_rsWeekIdx];
+  const curWeek  = weekMap[curKey];
+  const wStart   = curWeek.start;
+  const wEnd     = new Date(wStart); wEnd.setDate(wStart.getDate() + 6);
+  const weekNum  = _rsWeekIdx + 1;
+  const GOLD     = '#C9A227';
+  const MOIS_FR  = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  const fmtDate  = d => `${d.getDate()} ${MOIS_FR[d.getMonth()]} ${d.getFullYear()}`;
+
+  /* Sort matches within week: live first, then by date */
+  const ORDER = {['En cours']:0, ['Prolongation']:1, ['Terminé']:2};
+  const wMatches = curWeek.matches.slice().sort((a,b) => {
+    const od = (ORDER[a.statut]??3) - (ORDER[b.statut]??3);
+    if(od !== 0) return od;
+    return new Date(a.date) - new Date(b.date);
+  });
+
+  /* Navigation dots */
+  const dots = weeks.map((_,i) =>
+    `<div onclick="rsWeekGo(${i})"
+       style="width:${i===_rsWeekIdx?'20':'7'}px;height:7px;border-radius:4px;
+              background:${i===_rsWeekIdx?GOLD:'rgba(201,162,39,0.22)'};
+              cursor:pointer;transition:all .25s;flex-shrink:0"></div>`
+  ).join('');
+
+  const prevDis = _rsWeekIdx === 0;
+  const nextDis = _rsWeekIdx === weeks.length - 1;
+  const btnStyle = (dis) =>
+    `width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(201,162,39,${dis?'0.18':'0.55'});
+     background:${dis?'transparent':'rgba(201,162,39,0.1)'};
+     color:${dis?'rgba(201,162,39,0.25)':'#C9A227'};
+     cursor:${dis?'default':'pointer'};font-size:18px;display:flex;align-items:center;
+     justify-content:center;transition:all .2s;outline:none`;
+
+  l.innerHTML = `
+    <div style="margin-bottom:20px">
+      <!-- Week nav header -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;
+                  background:linear-gradient(135deg,rgba(201,162,39,0.07),rgba(120,90,0,0.04));
+                  border:1.5px solid rgba(201,162,39,0.22);border-radius:14px;
+                  padding:16px 20px 14px">
+        <div style="display:flex;align-items:center;gap:16px">
+          <button onclick="rsWeekNav(-1)" ${prevDis?'disabled':''} style="${btnStyle(prevDis)}">‹</button>
+          <div style="text-align:center">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.2em;
+                        color:${GOLD};text-shadow:0 0 16px rgba(201,162,39,0.35)">
+              Semaine ${String(weekNum).padStart(2,'0')}
+            </div>
+            <div style="font-size:11px;color:rgba(201,162,39,0.7);margin-top:3px;letter-spacing:.04em">
+              du ${fmtDate(wStart)} au ${fmtDate(wEnd)}
+            </div>
+          </div>
+          <button onclick="rsWeekNav(1)" ${nextDis?'disabled':''} style="${btnStyle(nextDis)}">›</button>
+        </div>
+        ${weeks.length > 1 ? `<div style="display:flex;gap:5px;align-items:center;margin-top:4px">${dots}</div>` : ''}
+        <div style="font-size:10px;color:rgba(201,162,39,0.4);letter-spacing:.06em">
+          ${wMatches.length} match${wMatches.length>1?'s':''} cette semaine
+        </div>
+      </div>
+    </div>
+    ${wMatches.map(m => mCard(m, isA, true, true)).join('')}
+  `;
 }
 
 function teamLogoHTML(id, sz=72, forMatch=false){
@@ -3220,6 +3331,280 @@ function submitAvis(){
   avisTypeSel=''; document.getElementById('avis-type').value='';
   rAvisUser();
 }
+/* ═══════════════════════════════════════════════════════════
+   STATISTIQUES DU TOURNOI
+   ═══════════════════════════════════════════════════════════ */
+function rStats(){
+  const el=document.getElementById('stats-body'); if(!el) return;
+  const GOLD='#C9A227', PRP='#a855f7', CYN='#06b6d4', GRN='#10b981', RED='#f43f5e', ORG='#f97316';
+  const MOIS_FR=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+
+  const teams   = DB.sTeams();
+  const players = DB.sPlayers().filter(p=>p.status==='approved');
+  const matches = DB.sMatches();
+  const finished= matches.filter(m=>m.statut==='Terminé');
+  const stand   = DB.standing();
+
+  /* ── Key totals ── */
+  const totalGoals = finished.reduce((s,m)=>s+(m.scoreDom||0)+(m.scoreVis||0),0);
+  const avgGoals   = finished.length?(totalGoals/finished.length).toFixed(1):'—';
+  const totalYC    = finished.reduce((s,m)=>s+_countC(m.cjDom)+_countC(m.cjVis),0);
+  const totalRC    = finished.reduce((s,m)=>s+_countC(m.crDom)+_countC(m.crVis),0);
+
+  function _countC(f){ return f&&f.trim()?f.split(',').filter(e=>e.trim()).length:0; }
+
+  /* ── Per-team stats ── */
+  const teamStats={}; // id→{bp,bc,j,g,n,per,pts,ycards,rcards,cs}
+  stand.forEach(s=>{ teamStats[s.id]={...s,ycards:0,rcards:0,cs:0}; });
+  finished.forEach(m=>{
+    if(teamStats[m.domId]){teamStats[m.domId].ycards+=_countC(m.cjDom);teamStats[m.domId].rcards+=_countC(m.crDom);}
+    if(teamStats[m.visId]){teamStats[m.visId].ycards+=_countC(m.cjVis);teamStats[m.visId].rcards+=_countC(m.crVis);}
+    if(teamStats[m.domId]&&(m.scoreVis||0)===0) teamStats[m.domId].cs++;
+    if(teamStats[m.visId]&&(m.scoreDom||0)===0) teamStats[m.visId].cs++;
+  });
+
+  /* ── Top scorer calc ── */
+  const scorerMap={};
+  function _parseGoals(field,teamId){
+    if(!field||!field.trim())return;
+    field.split(',').forEach(e=>{
+      e=e.trim(); if(!e)return;
+      const mul=(e.match(/\((\d+)\)/)||[])[1]; const cnt=mul?parseInt(mul):1;
+      const nm=e.match(/^(\d+)/); let pl=null;
+      if(nm) pl=players.find(p=>p.equipeId===Number(teamId)&&p.numero===parseInt(nm[1]));
+      if(!pl){
+        const name=e.replace(/^\d+\s*/,'').replace(/\(\d+\)/,'').trim().toLowerCase();
+        if(name) pl=players.find(p=>p.equipeId===Number(teamId)&&
+          (p.nom.toLowerCase().includes(name)||p.prenom.toLowerCase().includes(name)||name.includes(p.nom.toLowerCase())));
+      }
+      if(pl){if(!scorerMap[pl.id])scorerMap[pl.id]={id:pl.id,nom:pl.nom,prenom:pl.prenom,equipeId:pl.equipeId,poste:pl.poste||'',goals:0};scorerMap[pl.id].goals+=cnt;}
+    });
+  }
+  finished.forEach(m=>{_parseGoals(m.bdDom,m.domId);_parseGoals(m.bdVis,m.visId);});
+  const topScorers=Object.values(scorerMap).sort((a,b)=>b.goals-a.goals).slice(0,10);
+
+  /* ── Awards ── */
+  const active=Object.values(teamStats).filter(t=>t.j>0);
+  const bestAtk=active.slice().sort((a,b)=>b.bp-a.bp)[0];
+  const bestDef=active.slice().sort((a,b)=>a.bc-b.bc)[0];
+  const bestPts=active.slice().sort((a,b)=>b.pts-a.pts)[0];
+  const bestCS =active.slice().sort((a,b)=>b.cs-a.cs)[0];
+  const topScorer=topScorers[0]||null;
+  const topYC  =active.slice().sort((a,b)=>b.ycards-a.ycards)[0];
+  const topRC  =active.slice().sort((a,b)=>b.rcards-a.rcards)[0];
+
+  /* ── Biggest wins & most goals match ── */
+  let bigWin=null,bigDiff=0,bigGoalMatch=null,bigGoalVal=0;
+  finished.forEach(m=>{
+    const diff=Math.abs((m.scoreDom||0)-(m.scoreVis||0));
+    const tot=(m.scoreDom||0)+(m.scoreVis||0);
+    if(diff>bigDiff){bigDiff=diff;bigWin=m;}
+    if(tot>bigGoalVal){bigGoalVal=tot;bigGoalMatch=m;}
+  });
+
+  /* ── Render helpers ── */
+  const tName=id=>teams.find(t=>t.id===Number(id))?.nom||'?';
+
+  function keyCard(icon,val,lbl,sub,col){
+    return `<div style="background:linear-gradient(135deg,${col}14,${col}06);border:1.5px solid ${col}33;border-radius:14px;padding:14px 12px;display:flex;flex-direction:column;gap:3px">
+      <div style="font-size:20px;line-height:1">${icon}</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:${col};letter-spacing:.05em;line-height:1">${val}</div>
+      <div style="font-size:11px;font-weight:700;color:var(--text);letter-spacing:.03em">${lbl}</div>
+      ${sub?`<div style="font-size:10px;color:var(--text3)">${sub}</div>`:''}
+    </div>`;
+  }
+
+  function awardCard(icon,title,teamId,extra,col){
+    const t=teams.find(t=>t.id===Number(teamId));
+    if(!t) return `<div style="background:var(--bg3);border:1.5px solid var(--border);border-radius:16px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.4;text-align:center">
+      <div style="font-size:28px">${icon}</div>
+      <div style="font-size:9px;font-weight:700;color:var(--text3);letter-spacing:.14em;text-transform:uppercase">${title}</div>
+      <div style="font-size:11px;color:var(--text3)">Pas encore de données</div></div>`;
+    return `<div style="background:linear-gradient(145deg,${col}16,${col}06);border:2px solid ${col}50;border-radius:16px;padding:18px 14px;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;box-shadow:0 6px 24px ${col}18">
+      <div style="font-size:26px">${icon}</div>
+      <div style="font-size:9px;font-weight:700;color:${col};letter-spacing:.14em;text-transform:uppercase;opacity:.85">${title}</div>
+      <div style="margin:2px 0">${teamLogoHTML(t.id,44)}</div>
+      <div style="font-weight:800;font-size:13px;color:var(--text);font-family:'Syne',sans-serif;line-height:1.2">${t.nom}</div>
+      <div style="font-size:12px;font-weight:700;color:${col}">${extra}</div>
+    </div>`;
+  }
+
+  function playerAwardCard(icon,title,scorer,col){
+    if(!scorer) return `<div style="background:var(--bg3);border:1.5px solid var(--border);border-radius:16px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.4;text-align:center">
+      <div style="font-size:28px">${icon}</div>
+      <div style="font-size:9px;font-weight:700;color:var(--text3);letter-spacing:.14em;text-transform:uppercase">${title}</div>
+      <div style="font-size:11px;color:var(--text3)">Pas encore de données</div></div>`;
+    const t=teams.find(t=>t.id===Number(scorer.equipeId));
+    return `<div style="background:linear-gradient(145deg,${col}16,${col}06);border:2px solid ${col}50;border-radius:16px;padding:18px 14px;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;box-shadow:0 6px 24px ${col}18">
+      <div style="font-size:26px">${icon}</div>
+      <div style="font-size:9px;font-weight:700;color:${col};letter-spacing:.14em;text-transform:uppercase;opacity:.85">${title}</div>
+      <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,${col}dd,${col}66);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:900;font-size:16px;color:#fff;box-shadow:0 4px 16px ${col}44;margin:2px 0">${scorer.prenom.charAt(0)}${scorer.nom.charAt(0)}</div>
+      <div style="font-weight:800;font-size:13px;color:var(--text);font-family:'Syne',sans-serif;line-height:1.2">${scorer.prenom} ${scorer.nom}</div>
+      <div style="font-size:10px;color:var(--text3)">${t?.nom||'—'}</div>
+      <div style="font-size:14px;font-weight:700;color:${col}">⚽ ${scorer.goals} but${scorer.goals>1?'s':''}</div>
+    </div>`;
+  }
+
+  function barList(items,valFn,color,maxOvrd,unit,limit){
+    const vals=items.map(valFn);
+    const maxV=maxOvrd||Math.max(...vals,1);
+    return items.slice(0,limit||8).map((t,i)=>{
+      const v=valFn(t); const pct=Math.round((v/maxV)*100);
+      const medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
+      return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <div style="flex-shrink:0;width:26px;text-align:center">${medal||`<span style="font-size:10px;font-weight:700;color:var(--text3)">${i+1}</span>`}</div>
+        <div style="flex-shrink:0">${teamLogoHTML(t.id,26)}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:11px;font-weight:600;color:var(--text);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.nom||t.prenom+' '+t.nom}</div>
+          <div style="height:6px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden">
+            <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,${color},${color}77);border-radius:4px"></div>
+          </div>
+        </div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:17px;color:${color};flex-shrink:0;min-width:28px;text-align:right">${v}${unit||''}</div>
+      </div>`;
+    }).join('');
+  }
+
+  function scorerRow(s,rank){
+    const t=teams.find(t=>t.id===Number(s.equipeId));
+    const medal=rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':'';
+    const bg=rank===1?'rgba(201,162,39,0.1)':rank===2?'rgba(148,163,184,0.06)':rank===3?'rgba(205,127,50,0.06)':'transparent';
+    return `<div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;background:${bg};border:1px solid ${rank<=3?'rgba(201,162,39,0.15)':'rgba(255,255,255,0.04)'};margin-bottom:4px">
+      <div style="width:24px;text-align:center;font-size:14px;flex-shrink:0">${medal||`<span style="font-size:11px;font-weight:700;color:var(--text3)">${rank}</span>`}</div>
+      <div style="flex-shrink:0">${teamLogoHTML(s.equipeId,30)}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:700;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.prenom} ${s.nom}</div>
+        <div style="font-size:10px;color:var(--text3)">${t?.nom||'—'} · ${s.poste||'—'}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:3px;flex-shrink:0">
+        <span style="font-size:16px">⚽</span>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:${GOLD}">${s.goals}</span>
+      </div>
+    </div>`;
+  }
+
+  function section(title,icon,color,content){
+    return `<div style="background:var(--bg3);border:1.5px solid rgba(255,255,255,0.06);border-radius:16px;padding:18px;margin-bottom:14px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+        <div style="width:28px;height:28px;border-radius:8px;background:${color}22;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">${icon}</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.12em;color:${color}">${title}</div>
+      </div>
+      ${content}
+    </div>`;
+  }
+
+  /* ── Section 1: Key stats banner ── */
+  const infoMatch = bigGoalMatch ?
+    `${tName(bigGoalMatch.domId)} ${bigGoalMatch.scoreDom}-${bigGoalMatch.scoreVis} ${tName(bigGoalMatch.visId)}` : '—';
+  const infoWin = bigWin ?
+    (bigWin.scoreDom>bigWin.scoreVis?`${tName(bigWin.domId)} ${bigWin.scoreDom}-${bigWin.scoreVis} ${tName(bigWin.visId)}`:`${tName(bigWin.visId)} ${bigWin.scoreVis}-${bigWin.scoreDom} ${tName(bigWin.domId)}`) : '—';
+
+  const keysHTML=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:14px">
+    ${keyCard('⚽',totalGoals,'Buts marqués',`Moy. ${avgGoals}/match`,GOLD)}
+    ${keyCard('📋',finished.length,'Matchs joués',`${matches.filter(m=>m.statut==='Planifié').length} restants`,CYN)}
+    ${keyCard('🏟️',teams.length,'Équipes',`${active.length} en jeu`,PRP)}
+    ${keyCard('👤',players.length,'Joueurs inscrits','Approuvés',GRN)}
+    ${keyCard('🟨',totalYC,'Cartons jaunes',`${totalRC} 🟥 rouges`,ORG)}
+    ${keyCard('🏆',finished.length>0?Math.max(...active.map(t=>t.pts),0)+'pts':'—','Meilleur score',bestPts?bestPts.nom:'',GOLD)}
+  </div>`;
+
+  /* ── Section 2: Trophées ── */
+  const trophiesHTML=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px">
+    ${playerAwardCard('🥇','Meilleur buteur',topScorer,GOLD)}
+    ${awardCard('⚔️','Meilleure attaque',bestAtk?.id,bestAtk?bestAtk.bp+' buts':''  ,ORG)}
+    ${awardCard('🛡️','Meilleure défense',bestDef?.id,bestDef?bestDef.bc+' buts encaissés':'',GRN)}
+    ${awardCard('🏆','Meilleure équipe',bestPts?.id,bestPts?bestPts.pts+' pts':'',GOLD)}
+    ${awardCard('🧤','Plus de clean sheets',bestCS?.id,bestCS?bestCS.cs+' match'+( bestCS.cs>1?'s':'')+' sans encaisser':'',CYN)}
+  </div>`;
+
+  /* ── Section 3: Top buteurs ── */
+  const scorersHTML = topScorers.length
+    ? topScorers.map((s,i)=>scorerRow(s,i+1)).join('')
+    : `<div style="text-align:center;color:var(--text3);font-size:12px;padding:20px">Aucun but enregistré pour l'instant</div>`;
+
+  /* ── Section 4: Attaque bars ── */
+  const atkTeams=[...active].sort((a,b)=>b.bp-a.bp).slice(0,8).map(s=>teams.find(t=>t.id===s.id)).filter(Boolean);
+  const atkBars=atkTeams.length?barList(atkTeams,t=>teamStats[t.id]?.bp||0,ORG,null,''):
+    `<div style="color:var(--text3);font-size:12px;text-align:center;padding:12px">Aucune donnée</div>`;
+
+  /* ── Section 5: Défense bars (least goals conceded = best) ── */
+  const defTeams=[...active].sort((a,b)=>a.bc-b.bc).slice(0,8).map(s=>teams.find(t=>t.id===s.id)).filter(Boolean);
+  const maxBC=Math.max(...defTeams.map(t=>teamStats[t.id]?.bc||0),1);
+  const defBars=defTeams.length?defTeams.map((t,i)=>{
+    const v=teamStats[t.id]?.bc||0; const pct=maxBC>0?Math.round((v/maxBC)*100):0;
+    const inv=100-pct; // invert: fewer = better bar fill
+    const medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
+    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+      <div style="flex-shrink:0;width:26px;text-align:center">${medal||`<span style="font-size:10px;font-weight:700;color:var(--text3)">${i+1}</span>`}</div>
+      <div style="flex-shrink:0">${teamLogoHTML(t.id,26)}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:11px;font-weight:600;color:var(--text);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.nom}</div>
+        <div style="height:6px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden">
+          <div style="height:100%;width:${inv}%;background:linear-gradient(90deg,${GRN},${GRN}77);border-radius:4px"></div>
+        </div>
+      </div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:17px;color:${GRN};flex-shrink:0;min-width:28px;text-align:right">${v} <span style="font-size:10px;color:var(--text3)">enc.</span></div>
+    </div>`;
+  }).join(''):`<div style="color:var(--text3);font-size:12px;text-align:center;padding:12px">Aucune donnée</div>`;
+
+  /* ── Section 6: Clean sheets ── */
+  const csTeams=[...active].sort((a,b)=>b.cs-a.cs).slice(0,8).map(s=>teams.find(t=>t.id===s.id)).filter(Boolean);
+  const csBars=csTeams.length?barList(csTeams,t=>teamStats[t.id]?.cs||0,CYN,null,''):
+    `<div style="color:var(--text3);font-size:12px;text-align:center;padding:12px">Aucune donnée</div>`;
+
+  /* ── Section 7: Cartons ── */
+  const cardTeams=[...active].sort((a,b)=>(b.ycards+b.rcards*3)-(a.ycards+a.rcards*3)).slice(0,8)
+    .map(s=>teams.find(t=>t.id===s.id)).filter(Boolean);
+  const cardBars=cardTeams.length?cardTeams.map((t,i)=>{
+    const yc=teamStats[t.id]?.ycards||0;const rc=teamStats[t.id]?.rcards||0;
+    return `<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;padding:6px 10px;border-radius:9px;background:rgba(255,255,255,0.03)">
+      <div style="flex-shrink:0;width:26px;text-align:center;font-size:10px;font-weight:700;color:var(--text3)">${i+1}</div>
+      <div style="flex-shrink:0">${teamLogoHTML(t.id,26)}</div>
+      <div style="flex:1;font-size:11px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.nom}</div>
+      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+        <span style="display:flex;align-items:center;gap:3px;font-size:11px;color:#f59e0b;font-weight:700"><svg width="9" height="12" viewBox="0 0 9 12" fill="none"><rect width="9" height="12" rx="1.5" fill="#f59e0b"/></svg>${yc}</span>
+        <span style="display:flex;align-items:center;gap:3px;font-size:11px;color:#f43f5e;font-weight:700"><svg width="9" height="12" viewBox="0 0 9 12" fill="none"><rect width="9" height="12" rx="1.5" fill="#f43f5e"/></svg>${rc}</span>
+      </div>
+    </div>`;
+  }).join(''):`<div style="color:var(--text3);font-size:12px;text-align:center;padding:12px">Aucune donnée</div>`;
+
+  /* ── Section 8: Records ── */
+  const recordsHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    <div style="background:rgba(201,162,39,0.07);border:1px solid rgba(201,162,39,0.2);border-radius:12px;padding:12px">
+      <div style="font-size:10px;font-weight:700;color:${GOLD};letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">🏅 Victoire la plus large</div>
+      <div style="font-size:11px;color:var(--text);font-weight:600">${infoWin}</div>
+      ${bigWin?`<div style="font-size:10px;color:var(--text3);margin-top:2px">Écart : ${bigDiff} but${bigDiff>1?'s':''}</div>`:''}
+    </div>
+    <div style="background:rgba(6,182,212,0.07);border:1px solid rgba(6,182,212,0.2);border-radius:12px;padding:12px">
+      <div style="font-size:10px;font-weight:700;color:${CYN};letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">🎯 Plus prolifique</div>
+      <div style="font-size:11px;color:var(--text);font-weight:600">${infoMatch}</div>
+      ${bigGoalMatch?`<div style="font-size:10px;color:var(--text3);margin-top:2px">${bigGoalVal} buts au total</div>`:''}
+    </div>
+  </div>`;
+
+  /* ── Assemble ── */
+  el.innerHTML=`
+    <div style="margin-bottom:4px">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.16em;color:${GOLD};margin-bottom:12px;display:flex;align-items:center;gap:8px">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="${GOLD}" stroke-width="1.8"><path d="M2 12l3.5-4 3 2.5L12 5l2 2"/><path d="M1 14h14"/></svg>
+        CHIFFRES CLÉS
+      </div>
+      ${keysHTML}
+    </div>
+    ${section('TROPHÉES DU TOURNOI','🏆',GOLD,trophiesHTML)}
+    ${section('TOP BUTEURS','⚽',GOLD,topScorers.length?scorersHTML:`<div style="text-align:center;color:var(--text3);font-size:12px;padding:20px">Aucun but enregistré pour l'instant</div>`)}
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+      ${section('MEILLEURE ATTAQUE','⚔️',ORG,atkBars)}
+      ${section('MEILLEURE DÉFENSE','🛡️',GRN,defBars)}
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+      ${section('CLEAN SHEETS','🧤',CYN,csBars)}
+      ${section('CARTONS','🟨',ORG,cardBars)}
+    </div>
+    ${section('RECORDS DU TOURNOI','📊',PRP,recordsHTML)}
+  `;
+}
+
 let avisUserFilter='all';
 function setAvisUserFilter(f){ avisUserFilter=f; rAvisUser(); }
 function rAvisUser(){
